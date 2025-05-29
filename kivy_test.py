@@ -4,8 +4,7 @@ from kivy.uix.button import Button
 
 
 class Panel(BoxLayout):
-    def click_me(Button):
-        print("I'm a button")
+    button = Button(text="I am a button")
 
 class Test(App):
     def build(self):
