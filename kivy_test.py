@@ -1,8 +1,11 @@
-from kivy import App
+from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+
 
 class Panel(BoxLayout):
-    pass
+    def click_me(Button):
+        print("I'm a button")
 
 class Test(App):
     def build(self):
