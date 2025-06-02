@@ -36,8 +36,9 @@ class TouchPanel(FloatLayout):
             case 'Linux':   
                 image_directory = Path.cwd() / 'images' / 'backgrounds'
             case 'Windows':
-
-                image_directory = Path('C:/Users/Christopher/OneDrive - UW/Documents/Projects/kivy_test/images/backgrounds')
+                image_directory = Path.cwd() / 'images' / 'backgrounds'
+                #  image_directory = Path('C:/Users/Christopher/Projects/kivy_test/images/backgrounds')
+                # image_directory = Path('C:/Users/Christopher/OneDrive - UW/Documents/Projects/kivy_test/images/backgrounds')
             case _:
                 Exception("Not a supported OS")        
         
