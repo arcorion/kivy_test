@@ -54,26 +54,34 @@ class TopBar(Widget):
 class PowerButton(ToggleButton):
     pass
 
+
 class InputOption(ToggleButton):
     pass
+
 
 class InputButton(InputOption):
     pass
 
+
 class TouchButton(ToggleButton):
     pass
+
 
 class MuteButton(TouchButton):
     pass
 
+
 class OptionButton(TouchButton):
     pass
+
 
 class FreezeButton(TouchButton):
     pass
 
+
 class BlankButton(TouchButton):
     pass
+
 
 class Huskontroller(App):
     def build(self):
