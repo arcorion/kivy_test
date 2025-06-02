@@ -3,8 +3,11 @@ from kivy.config import Config
 from kivy.core.window import Window
 from kivy.graphics import *
 from kivy.lang.builder import Builder
+from kivy.uix.button import Button
 from kivy.uix.label import Label
-from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.slider import Slider
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.widget import Widget
 from pathlib import Path
@@ -27,7 +30,7 @@ match operating_system:
 
 Builder.load_file('kivy_test.kv')
 
-class TouchPanel(FloatLayout):
+class TouchPanel(BoxLayout):
     def __init__(self, **kwargs):
         super(TouchPanel, self).__init__(**kwargs)
 
@@ -46,40 +49,95 @@ class TouchPanel(FloatLayout):
         return str(choice(background_list))
 
 
-class TopBar(Widget):
+class TopBar(ToggleButton):
+    """
+    Top informational bar
+    """
     def __init__(self, **kwargs):
         super(TopBar, self).__init__(**kwargs)
+
+
+class Desktop(BoxLayout):
+    """
+    Main desktop compopent - contains everything except
+    the TopBar
+    """
+    pass
+
+
+class PowerInput(BoxLayout):
+    """
+    Contains the PowerButton and InputButtons
+    """
+    pass
 
 
 class PowerButton(ToggleButton):
     pass
 
 
-class InputOption(ToggleButton):
+class InputButtons(GridLayout):
+    """
+    Contains the different InputButton widgets.
+    """
+    
     pass
 
 
-class InputButton(InputOption):
+class InputButton(ToggleButton):
+    """
+    Buttons used to toggle input
+    """
     pass
 
 
-class TouchButton(ToggleButton):
+class BlankSpace(Label):
+    """
+    Empty Label - provides blank space to make the interface
+    more "roomy"
+    """
     pass
 
 
-class MuteButton(TouchButton):
+class ImageButtons(BoxLayout):
+    """
+    Contains BlankButton and FreezeButton, as well
+    as a blank for later use.
+    """
+
+
+class LaterUseBlank(Label):
+    """
+    Blank space set aside for later use, probably for the
+    camera toggle.
+    """
     pass
 
 
-class OptionButton(TouchButton):
+class BlankButton(ToggleButton):
     pass
 
 
-class FreezeButton(TouchButton):
+class FreezeButton(ToggleButton):
     pass
 
 
-class BlankButton(TouchButton):
+class SoundControls(BoxLayout):
+    """
+    Contains VolumeLabel, VolumeSlider, and MuteButton
+    """
+    pass
+
+
+class VolumeLabel(Button):
+    pass
+
+
+class VolumeSlider(Slider):    
+    pass
+
+
+class MuteButton(ToggleButton):
     pass
 
 
