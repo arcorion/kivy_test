@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.config import Config
 from kivy.core.window import Window
 from kivy.graphics import *
+from kivy.graphics import Callback
 from kivy.lang.builder import Builder
 from kivy.uix.button import Button
 from kivy.uix.label import Label
@@ -14,6 +15,25 @@ from pathlib import Path
 from random import choice
 import platform
 
+# Setting color constants:
+SELECTED_TRANSPARENCY = .95
+UNSELECTED_TRANSPARENCY = .45
+# Husky colors - only Husky Purple used as I write this, but
+# kept for future options.
+HUSKY_PURPLE = [50/255, 0, 100/255]
+SPIRIT_PURPLE = [51/255, 0, 111/255]
+HUSKY_GOLD = [232/255, 211/255, 162/255]
+HERITAGE_GOLD = [145/255, 123/255, 76/255]
+SPIRIT_GOLD = [1, 199/255, 0]
+ACCENT_GREEN = [170/255, 219/255, 30/255]
+ACCENT_TEAL = [42/255, 210/255, 201/255]
+ACCENT_PINK = [233/255, 60/255, 172/255]
+ACCENT_LAVENDER = [197/255, 180/255, 227/255]
+# Input buttons
+PODIUM_GREEN = [0/255, 90/255, 45/255]
+USBC_RED = [200/255, 30/255, 30/255]
+HDMI_YELLOW = [210/255, 210/255, 10/255]
+VGA_BLUE = [0/255, 10/255, 150/255]
 
 operating_system = platform.system()
 match operating_system:
@@ -46,7 +66,49 @@ class TouchPanel(BoxLayout):
                 Exception("Not a supported OS")        
         
         background_list = [x for x in image_directory.iterdir()]
-        return str(choice(background_list))
+        #return str(choice(background_list))
+        return "./images/backgrounds/pidubs-normal.png"
+
+
+class DefaultButton(ToggleButton):
+    """
+    Describes the default settings for buttons in 
+    Huskontroller.
+    """
+    def __init__(self, start_color=None, **kwargs):
+        super(DefaultButton, self).__init__(**kwargs)
+        if not start_color:
+            start_color = HUSKY_PURPLE
+        self.background_color_normal = self.add_transparency(
+            start_color, 'unselected')
+        self.background_color_down =  self.add_transparency(
+            start_color, 'selected')
+        self.background_color = self.background_color_normal
+        self.background_down = ''
+        self.background_normal = ''
+        self.color = (25/255, 25/255, 25/255, 1)
+        self.color_down = (250/255, 250/255, 250/255, 1)
+        self.color_normal = (25/255, 25/255, 25/255, 1)
+        self.font_name = './fonts/open_sans/open_sans_regular.ttf'
+        self.font_size = 24
+
+    def on_state(self, widget, value):
+        if value == 'down':
+            self.background_color = self.background_color_down
+            self.color = self.color_down
+        else:
+            self.background_color = self.background_color_normal
+            self.color = self.color_normal
+
+    def add_transparency(self, color, selected):
+        match selected:
+            case 'selected':
+                transparency = SELECTED_TRANSPARENCY
+            case 'unselected':
+                transparency = UNSELECTED_TRANSPARENCY
+        color = list(color)[:3]
+        color.append(transparency)
+        return color
 
 
 class TopBar(ToggleButton):
@@ -72,23 +134,47 @@ class PowerInput(BoxLayout):
     pass
 
 
-class PowerButton(ToggleButton):
+class PowerButtonContainer(BoxLayout):
     pass
+
+class PowerButton(DefaultButton):
+    
+    def __init__(self, **kwargs):
+        super(PowerButton, self).__init__(**kwargs)
 
 
 class InputButtons(GridLayout):
     """
     Contains the different InputButton widgets.
     """
-    
     pass
 
 
-class InputButton(ToggleButton):
+class InputButton(DefaultButton):
     """
     Buttons used to toggle input
     """
-    pass
+    def __init__(self, **kwargs):
+        start_color = None
+        match self.text:
+            case 'podium':
+                start_color = PODIUM_GREEN
+            case 'usbc':
+                start_color = USBC_RED
+            case 'hdmi':
+                start_color = HDMI_YELLOW
+            case 'vga':
+                start_color = VGA_BLUE
+        super(InputButton, self).__init__(start_color, **kwargs)
+        self.allow_no_selection = False
+
+        #usbc_red = USBC_RED
+        #hdmi_yellow = HDMI_YELLOW
+        #vga_blue = VGA_BLUE
+        #podium_disabled = 
+        #usbc_disabled = 
+        #hdmi_disabled = 
+        #vga_disabled = 
 
 
 class BlankSpace(Label):
@@ -104,6 +190,7 @@ class ImageButtons(BoxLayout):
     Contains BlankButton and FreezeButton, as well
     as a blank for later use.
     """
+    pass
 
 
 class LaterUseBlank(Label):
@@ -114,11 +201,11 @@ class LaterUseBlank(Label):
     pass
 
 
-class BlankButton(ToggleButton):
+class BlankButton(DefaultButton):
     pass
 
 
-class FreezeButton(ToggleButton):
+class FreezeButton(DefaultButton):
     pass
 
 
@@ -137,7 +224,7 @@ class VolumeSlider(Slider):
     pass
 
 
-class MuteButton(ToggleButton):
+class MuteButton(DefaultButton):
     pass
 
 

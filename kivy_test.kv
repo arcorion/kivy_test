@@ -5,16 +5,14 @@
         Rectangle:
             pos: self.pos
             size: self.size
-            #source: './images/pidubs-normal.png'
-            #source: './images/background_options/cherry_blossoms_lamp.png'
             source: self.get_background()
     orientation: 'vertical'
-    padding: [0, 0, 0, 0]
-    TopBar:
-        background_color: 'black'
-        id: topbar
-        size_hint: 1, 10
-        text: 'topbar'
+    padding: [5, 5, 5, 5]
+    #TopBar:
+    #    background_color: 'black'
+    #    id: topbar
+    #    size_hint: 1, 10
+    #    text: 'topbar'
     Desktop:
         padding: [5, 5, 5, 5]
         orientation: 'horizontal'
@@ -22,45 +20,49 @@
         PowerInput:
             size_hint: 45, 1
             orientation: 'vertical'
-            PowerButton:
-                background_color: 'purple'
-                id: power
+            PowerButtonContainer:
+                padding: [10, 0]
                 size_hint: 1, 15
-                text: 'power'
+                spacing: 5            
+                PowerButton:
+                    id: power
+                    text: 'power'
             InputButtons:
                 cols: 2
+                padding: [10]
                 rows: 2
                 size_hint: 1, 85
+                spacing: 5
                 InputButton:
-                    background_color: 'green'
+                    group: 'input_buttons'
                     id: podium
                     text: 'podium'
                 InputButton:
-                    background_color: 'blue'
+                    group: 'input_buttons'
                     id: usbc
                     text: 'usbc'
                 InputButton:
-                    background_color: 'yellow'
+                    group: 'input_buttons'               
                     id: hdmi
                     text: 'hdmi'
                 InputButton:
-                    background_color: 'red'
+                    group: 'input_buttons'               
                     id: vga
                     text: 'vga'
         BlankSpace:
-            size_hint: 30, 1
+            size_hint: 25, 1
         ImageButtons:
-            size_hint: 15, 1
+            padding: [10]
+            size_hint: 20, 1
+            spacing: 5
             orientation: 'vertical'
             LaterUseBlank:
                 size_hint: 1, 15
             BlankButton:
-                background_color: 'purple'
                 id: blank
                 size_hint: 1, 42.5
                 text: 'blank'                    
             FreezeButton:
-                background_color: 'purple'
                 id: freeze
                 size_hint: 1, 42.5
                 text: 'freeze' 
@@ -69,7 +71,6 @@
             orientation: 'vertical'
             VolumeLabel:
                 background_color: 'white'
-                color: 'purple'
                 disabled: 'True'
                 halign: 'center'
                 size_hint: 1, 10
@@ -86,7 +87,6 @@
                 text: 'volume'
                 value: 50
             MuteButton:
-                background_color: 'purple'
                 id: mute
                 size_hint: 1, 15
                 text: 'mute'
