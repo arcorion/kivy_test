@@ -55,19 +55,11 @@ class TouchPanel(BoxLayout):
         super(TouchPanel, self).__init__(**kwargs)
 
     def get_background(self):
-        match operating_system:
-            case 'Linux':   
-                image_directory = Path.cwd() / 'images' / 'backgrounds'
-            case 'Windows':
-                image_directory = Path.cwd() / 'images' / 'backgrounds'
-                #  image_directory = Path('C:/Users/Christopher/Projects/kivy_test/images/backgrounds')
-                # image_directory = Path('C:/Users/Christopher/OneDrive - UW/Documents/Projects/kivy_test/images/backgrounds')
-            case _:
-                Exception("Not a supported OS")        
+        image_directory = Path.cwd() / 'images' / 'backgrounds'     
         
         background_list = [x for x in image_directory.iterdir()]
-        #return str(choice(background_list))
-        return "./images/backgrounds/pidubs-normal.png"
+        return str(choice(background_list))
+        #return "./images/backgrounds/pidubs-normal.png"
 
 
 class DefaultButton(ToggleButton):
