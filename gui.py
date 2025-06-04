@@ -48,7 +48,7 @@ match operating_system:
     case _:
         Exception("Not a supported OS")
 
-Builder.load_file('kivy_test.kv')
+Builder.load_file('gui.kv')
 
 class TouchPanel(BoxLayout):
     def __init__(self, **kwargs):
