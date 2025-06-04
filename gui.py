@@ -43,7 +43,7 @@ match operating_system:
         Config.set('graphics', 'height', '480')
         Config.set('graphics', 'borderless', '1')
         Window.show_cursor = False
-    case 'Windows':
+    case 'Windows' | 'Darwin':
         Window.size = (800, 480)
     case _:
         Exception("Not a supported OS")
